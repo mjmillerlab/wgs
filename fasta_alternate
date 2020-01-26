@@ -1,0 +1,10 @@
+  #!/bin/bash
+
+# Use the following to re-merge vcfs after splitting by -L
+`java -jar picard.jar GatherVcfs I=CM012114_lamp2.g.vcf.gz I=CM012115_lamp2.g.vcf.gz I=CM012116_lamp2.g.vcf.gz I=CM012117_lamp2.g.vcf.gz I=CM012118_lamp2.g.vcf.gz I=CM012119_lamp2.g.vcf.gz I=CM012120_lamp2.g.vcf.gz I=CM012121_lamp2.g.vcf.gz I=CM012122_lamp2.g.vcf.gz I=CM012123_lamp2.g.vcf.gz I=CM012124_lamp2.g.vcf.gz I=CM012125_lamp2.g.vcf.gz I=CM012126_lamp2.g.vcf.gz I=CM012127_lamp2.g.vcf.gz I=CM012128_lamp2.g.vcf.gz I=CM012129_lamp2.g.vcf.gz I=CM012130_lamp2.g.vcf.gz I=CM012131_lamp2.g.vcf.gz I=CM012132_lamp2.g.vcf.gz I=CM012133_lamp2.g.vcf.gz I=CM012134_lamp2.g.vcf.gz I=CM012135_lamp2.g.vcf.gz I=CM012136_lamp2.g.vcf.gz I=CM012137_lamp2.g.vcf.gz I=CM012138_lamp2.g.vcf.gz I=CM012139_lamp2.g.vcf.gz I=CM012140_lamp2.g.vcf.gz I=CM012141_lamp2.g.vcf.gz I=CM012142_lamp2.g.vcf.gz I=CM012143_lamp2.g.vcf.gz I=CM012144_lamp2.g.vcf.gz I=CM012145_lamp2.g.vcf.gz I=CM012146_lamp2.g.vcf.gz I=non_chrom_lamp2.g.vcf.gz O=lamp2.merged.gmvcf.gz`
+
+# Even if you indexed the original g.vcfs.gz, you need to index again
+`gatk --java-options '-Xmx32g' IndexFeatureFile -I lamp2.merged.g.vcf.gz`
+
+# Then you can replace the original reference with your species-specific variants
+`gatk FastaAlternateReferenceMaker -R anna_chromosome.fasta -O lampornis_psuedo.fasta -V lamp2.merged.g.vcf.gz`
