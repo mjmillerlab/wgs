@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bwa mem -t 8 lamp2_S39_-nomtdna-R1.fastq.gz lamp2_S39_-nomtdna-R2.fastq.gz | samtools sort -@8 -o lamp2_sorted.bam -
+bwa mem -t 8 lampornis_psuedo.fasta lamp2_S39_-nomtdna-R1.fastq.gz lamp2_S39_-nomtdna-R2.fastq.gz | samtools sort -@8 -o lamp2_sorted.bam -
 
 java -Xmx32g -jar picard.jar CleanSam I=lamp2_sorted.bam O=lamp2_cleaned.bam
 java -Xmx32g -jar picard.jar SortSam I=lamp2_cleaned.bam O=lamp2_cleaned_sorted.bam SORT_ORDER=coordinate
