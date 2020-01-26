@@ -8,3 +8,11 @@
 
 # Then you can replace the original reference with your species-specific variants
 `gatk FastaAlternateReferenceMaker -R anna_chromosome.fasta -O lampornis_psuedo.fasta -V lamp2.merged.g.vcf.gz`
+
+# index new fasta 
+bwa index lampornis_psuedo.fasta
+java -jar picard.jar CreateSequenceDictionary R= lampornis_psuedo.fasta O= lampornis_psuedo.dict
+
+
+
+
